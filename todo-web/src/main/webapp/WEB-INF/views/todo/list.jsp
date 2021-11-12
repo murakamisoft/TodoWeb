@@ -3,30 +3,54 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Todo List</title>
-<style type="text/css">
-.strike {
-    text-decoration: line-through;
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/app/css/styles.css" type="text/css">
 </head>
 <body>
-    <h1>Todo List</h1>
+    <h1>Todoリスト</h1>
+
+    <div id="todoForm">
+        <t:messagesPanel />
+
+        <form:form
+            action="${pageContext.request.contextPath}/todo/create"
+            method="post" modelAttribute="todoForm">
+            <form:input path="todoTitle" />
+            <form:errors path="todoTitle" cssClass="text-error" />
+            <form:button>Todoを新規作成</form:button>
+        </form:form>
+    </div>
     <hr />
     <div id="todoList">
         <ul>
-            <!-- (1) -->
             <c:forEach items="${todos}" var="todo">
                 <li><c:choose>
-                        <c:when test="${todo.finished}"><!-- (2) -->
-                            <span class="strike">
-                            <!-- (3) -->
-                            ${f:h(todo.todoTitle)}
-                            </span>
+                        <c:when test="${todo.finished}">
+                            <span class="strike">${f:h(todo.todoTitle)}</span>
                         </c:when>
                         <c:otherwise>
                             ${f:h(todo.todoTitle)}
-                         </c:otherwise>
-                    </c:choose></li>
+                            <form:form
+                                action="${pageContext.request.contextPath}/todo/finish"
+                                method="post"
+                                modelAttribute="todoForm"
+                                cssClass="inline">
+                                <form:hidden path="todoId"
+                                    value="${f:h(todo.todoId)}" />
+                                <form:button>Finish</form:button>
+                            </form:form>
+                        </c:otherwise>
+                    </c:choose>
+                    <!-- (1) -->
+                    <form:form
+                        action="${pageContext.request.contextPath}/todo/delete"
+                        method="post" modelAttribute="todoForm"
+                        cssClass="inline">
+                        <!-- (2) -->
+                        <form:hidden path="todoId"
+                            value="${f:h(todo.todoId)}" />
+                        <form:button>Delete</form:button>
+                    </form:form>
+                </li>
             </c:forEach>
         </ul>
     </div>
