@@ -1,5 +1,7 @@
 # Compiled class file
 *.class
+target/
+
 
 # Log file
 *.log
@@ -234,3 +236,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
