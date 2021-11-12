@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Todo List</title>
+<title>Todoリスト</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/app/css/styles.css" type="text/css">
 </head>
 <body>
@@ -36,19 +36,17 @@
                                 cssClass="inline">
                                 <form:hidden path="todoId"
                                     value="${f:h(todo.todoId)}" />
-                                <form:button>Finish</form:button>
+                                <form:button>完了</form:button>
                             </form:form>
                         </c:otherwise>
                     </c:choose>
-                    <!-- (1) -->
                     <form:form
                         action="${pageContext.request.contextPath}/todo/delete"
                         method="post" modelAttribute="todoForm"
                         cssClass="inline">
-                        <!-- (2) -->
                         <form:hidden path="todoId"
                             value="${f:h(todo.todoId)}" />
-                        <form:button>Delete</form:button>
+                        <form:button>削除</form:button>
                     </form:form>
                 </li>
             </c:forEach>

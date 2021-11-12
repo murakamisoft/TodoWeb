@@ -254,6 +254,8 @@ footer {
   }
 }
 
+
+
 .strike {
     text-decoration: line-through;
 }
@@ -290,3 +292,4 @@ footer {
 #todoList li {
     margin-top: 5px;
 }
+
